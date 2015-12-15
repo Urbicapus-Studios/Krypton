@@ -1,0 +1,59 @@
+#!/bin/bash
+bold=$(tput bold)
+norm=$(tput sgr0)
+
+enkrypt=""
+dekrypt=""
+wryte=""
+
+randtmp=$(echo -e "$$" | md5)
+
+while [ "$1" != "" ]; do
+case $1 in
+	-e | --encrypt )	enkrypt="1"
+                        	break ;;
+	-d | --decrypt )	dekrypt="1"
+                        	break ;;
+	-w | --write )		wryte="1"
+				break ;;
+	* )                 	exit 0
+esac
+done
+
+enkryptor() {
+	read -p "Drag in the file you would like to encrypt: " fileToEncrypt
+	read -p "Type the path of the file to write to: " fileToWriteTo
+	openssl enc -e -aes256 -in $fileToEncrypt -out $fileToWriteTo
+}
+dekryptor() {
+	read -p "Drag in the file you would like to decrypt: " fileToDecrypt
+	#read -p "Type the path for the decrypted file: " fileToWriteDecryptedDataTo
+	printf "\n\n"
+	tput bold && openssl enc -d -aes256 -in $fileToDecrypt && tput sgr0
+	printf "\n\n"
+}
+wryter() {
+	mkdir /tmp/tmp$$/
+	read -p "Drag in the file you would like to edit: " fileToEdit
+	openssl enc -d -aes256 -in $fileToEdit -out /tmp/tmp$$/$$.txt
+	nano /tmp/tmp$$/$$.txt && openssl enc -e -aes256 -in /tmp/tmp$$/$$.txt -out $fileToEdit && rm -rfv /tmp/tmp$$
+}
+
+if [ "$enkrypt" = "1" ]
+	then
+		enkryptor
+	elif [ "$dekrypt" = "1" ]
+	then
+		dekryptor
+	elif [ "$wryte" = "1" ]
+	then
+		wryter
+	elif [ "$1" = "" ]
+	then
+		printf "\n\n"
+		printf "${bold}Usage:${norm}"
+		printf "\n   -e | --encrypt   •   Encrypt a file with AES256 (preferably plain text)"
+		printf "\n   -d | --decrypt   •   Decrypt a previously AES256 encrypted file"
+		printf "\n   -w | --write     •   Edit a previously AES256 encrypted file"
+		printf "\n\n\n"
+fi
