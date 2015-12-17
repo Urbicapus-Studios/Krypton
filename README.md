@@ -2,13 +2,13 @@
 ### Simple encryptor, decryptor, and encrypted file editor.
 
 Krypton was inspired by my schools great idea to unencrypt all the data going in and out of every device on the network.
-I built Krypton for easily sharing encrypted data through email, since a password is needed of AES256 encryption with OpenSSL.
+I built Krypton for easily sharing AES256 encrypted data/files through email (or other sharing service).
 
 ----
 
 Installation:
 <br>
-`sudo curl https://raw.githubusercontent.com/Urbicapus-Studios/Krypton/master/krypton -o /usr/bin/krypton && sudo chmod +x /usr/bin/krypton`
+`sudo curl http://thrifus.co/krypton -o /usr/bin/krypton && sudo chmod +x /usr/bin/krypton`
 
 ----
 
