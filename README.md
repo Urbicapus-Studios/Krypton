@@ -8,7 +8,7 @@ I built Krypton for easily sharing AES256 encrypted data/files through email (or
 
 Installation:
 <br>
-`sudo curl http://thrifus.co/krypton -o /usr/bin/krypton && sudo chmod +x /usr/bin/krypton`
+`sudo curl https://raw.githubusercontent.com/Urbicapus-Studios/Krypton/master/krypton -o /usr/bin/krypton && sudo chmod +x /usr/bin/krypton`
 
 ----
 
